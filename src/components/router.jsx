@@ -1,11 +1,16 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import { PostsPage } from "../pages/Posts.jsx";
 import { UsersPage } from "../pages/Users.jsx";
 import { TodosPage } from "../pages/Todos.jsx";
+import { PostPage } from "../pages/Post.jsx";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "*",
+    element: <Navigate to="/posts" />,
+  },
+  {
+    path: "/posts",
     element: <PostsPage />,
   },
   {
@@ -15,5 +20,9 @@ export const router = createBrowserRouter([
   {
     path: "/todos",
     element: <TodosPage />,
+  },
+  {
+    path: "/post",
+    element: <PostPage />,
   },
 ]);
