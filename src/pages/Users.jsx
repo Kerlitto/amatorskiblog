@@ -1,4 +1,3 @@
-import { Navbar } from "../components/Navbar";
 import "../styles.css";
 import { Link, useLoaderData } from "react-router-dom";
 import { getUsers } from "../api/users";
@@ -8,26 +7,23 @@ function UsersPage() {
 
   return (
     <>
-      <Navbar />
-      <div className="container">
-        <h1>Users</h1>
-        <div className="card-grid">
-          {users.map((users) => (
-            <div key={users.Id} className="card">
-              <div className="card-top">{users.name}</div>
-              <div className="card-body">
-                {users.company.name}
-                <br></br> {users.website}
-                <br></br> {users.email}
-              </div>
-              <div className="card-footer">
-                <Link to={`/users/${users.id}`} className="view-button">
-                  View
-                </Link>
-              </div>
+      <h1>Users</h1>
+      <div className="card-grid">
+        {users.map((users) => (
+          <div key={users.Id} className="card">
+            <div className="card-top">{users.name}</div>
+            <div className="card-body">
+              {users.company.name}
+              <br></br> {users.website}
+              <br></br> {users.email}
             </div>
-          ))}
-        </div>
+            <div className="card-footer">
+              <Link to={`/users/${users.id}`} className="view-button">
+                View
+              </Link>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );

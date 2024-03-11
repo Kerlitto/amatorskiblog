@@ -1,47 +1,56 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
-import { PostPage } from "../pages/Post.jsx";
+import { postPageRoute } from "../pages/Post.jsx";
 import { postsPageRoute } from "../pages/Posts.jsx";
 import { usersPageRoute } from "../pages/Users.jsx";
+import { userPageRoute } from "../pages/User.jsx";
 import { todosPageRoute } from "../pages/Todos.jsx";
+import { Navbar } from "./Navbar.jsx";
 
 export const router = createBrowserRouter([
-  // {
-  //   path: "*",
-  //   element: <Navigate to="/posts" />,
-  // },
   {
-    path: "/posts",
-    children: [
-      {
-        index: true,
-        ...postsPageRoute,
-      },
-      { path: "postId", element: <h1>Hi post</h1> },
-    ],
+    path: "*",
+    element: <Navigate to="/posts" />,
   },
   {
-    path: "/users",
+    path: "/",
+    element: <Navbar />,
+
     children: [
       {
-        index: true,
-        ...usersPageRoute,
+        errorElement: <h1>error</h1>,
+        children: [
+          {
+            path: "/posts",
+            children: [
+              {
+                index: true,
+                ...postsPageRoute,
+              },
+              { path: ":postId", ...postPageRoute },
+            ],
+          },
+          {
+            path: "/users",
+            children: [
+              {
+                index: true,
+                ...usersPageRoute,
+              },
+              { path: ":userId", ...userPageRoute },
+            ],
+          },
+          {
+            path: "/todos",
+            children: [
+              {
+                index: true,
+                ...todosPageRoute,
+              },
+            ],
+          },
+        ],
       },
-      { path: "userId", element: <h1>Hi user</h1> },
     ],
-  },
-  {
-    path: "/todos",
-    children: [
-      {
-        index: true,
-        ...todosPageRoute,
-      },
-      { path: "userId", element: <h1>Hi user</h1> },
-    ],
-  },
-  {
-    path: "/post",
-    element: <PostPage />,
   },
 ]);
