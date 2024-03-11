@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import "../styles.css";
+import { Link, useLoaderData } from "react-router-dom";
+import { getUsers } from "../api/users";
 
-export const UsersPage = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    // Fetch data from JSON file
-    fetch("http://127.0.0.1:3000/users")
-      .then((response) => response.json())
-      .then((data) => setData(data))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+function UsersPage() {
+  const users = useLoaderData();
 
   return (
     <>
@@ -19,16 +12,18 @@ export const UsersPage = () => {
       <div className="container">
         <h1>Users</h1>
         <div className="card-grid">
-          {data.map((data) => (
-            <div key={data.Id} className="card">
-              <div className="card-top">{data.name}</div>
+          {users.map((users) => (
+            <div key={users.Id} className="card">
+              <div className="card-top">{users.name}</div>
               <div className="card-body">
-                {data.company.name}
-                <br></br> {data.website}
-                <br></br> {data.email}
+                {users.company.name}
+                <br></br> {users.website}
+                <br></br> {users.email}
               </div>
               <div className="card-footer">
-                <button className="view-button">View</button>
+                <Link to={`/users/${users.id}`} className="view-button">
+                  View
+                </Link>
               </div>
             </div>
           ))}
@@ -36,4 +31,13 @@ export const UsersPage = () => {
       </div>
     </>
   );
+}
+
+function loader({ request: { signal } }) {
+  return getUsers({ signal });
+}
+
+export const usersPageRoute = {
+  loader,
+  element: <UsersPage />,
 };

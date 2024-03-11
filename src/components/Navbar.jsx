@@ -4,12 +4,12 @@ import "../styles.css";
 export const Navbar = () => {
   return (
     <nav className="top-nav">
-      <Link to="/" className="big-text">
+      <Link to="/posts" className="big-text">
         Blog
       </Link>
       <ul className="nav-bar">
         <li>
-          <Link to="/" className="link">
+          <Link to="/posts" className="link">
             Posts
           </Link>
         </li>

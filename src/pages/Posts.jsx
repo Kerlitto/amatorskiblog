@@ -1,18 +1,11 @@
-import { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import "../styles.css";
 import { Link } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+import { getPosts } from "../api/posts";
 
-export const PostsPage = () => {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    // Fetch posts from JSON file
-    fetch("http://127.0.0.1:3000/posts")
-      .then((response) => response.json())
-      .then((posts) => setPosts(posts))
-      .catch((error) => console.error("Error fetching posts:", error));
-  }, []);
+function PostsPage() {
+  const posts = useLoaderData();
 
   return (
     <>
@@ -25,7 +18,7 @@ export const PostsPage = () => {
               <div className="card-top">{post.title}</div>
               <div className="card-body">{post.body}</div>
               <div className="card-footer">
-                <Link to="/post" className="view-button">
+                <Link to={`/posts/${post.id}`} className="view-button">
                   View
                 </Link>
               </div>
@@ -35,4 +28,13 @@ export const PostsPage = () => {
       </div>
     </>
   );
+}
+
+function loader({ request: { signal } }) {
+  return getPosts({ signal });
+}
+
+export const postsPageRoute = {
+  loader,
+  element: <PostsPage />,
 };

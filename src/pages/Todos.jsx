@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import "../styles.css";
+import { getTodos } from "../api/todos";
+import { useLoaderData } from "react-router-dom";
 
-export const TodosPage = () => {
-  const [data, setData] = useState([]);
+const TodosPage = () => {
+  const data = useLoaderData();
 
   const [isActive, setIsActive] = useState(false);
 
@@ -11,14 +13,6 @@ export const TodosPage = () => {
     !data.completed;
     setIsActive(!isActive);
   };
-
-  useEffect(() => {
-    // Fetch data from JSON file
-    fetch("http://127.0.0.1:3000/todos")
-      .then((response) => response.json())
-      .then((data) => setData(data))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
 
   return (
     <>
@@ -39,4 +33,13 @@ export const TodosPage = () => {
       </div>
     </>
   );
+};
+
+function loader({ request: { signal } }) {
+  return getTodos({ signal });
+}
+
+export const todosPageRoute = {
+  loader,
+  element: <TodosPage />,
 };
