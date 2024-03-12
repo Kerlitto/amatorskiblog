@@ -7,3 +7,4 @@ export const getPosts = (options) => {
 export const getPost = (postId,options) => {
     return baseApi.get(`posts/${postId}`, options).then(res=>res.data)
 }
+

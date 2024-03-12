@@ -15,7 +15,7 @@ function UsersPage() {
             <div className="card-body">
               {users.company.name}
               <br></br> {users.website}
-              <br></br> {users.email}
+              <br></br> <Link to={`mailto:${users.email}`}>{users.email}</Link>
             </div>
             <div className="card-footer">
               <Link to={`/users/${users.id}`} className="view-button">

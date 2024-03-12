@@ -11,7 +11,7 @@ function PostsPage() {
       <h1>Posts</h1>
       <div className="card-grid">
         {posts.map((post) => (
-          <div key={post.userId} className="card">
+          <div key={post.id} className="card">
             <div className="card-top">{post.title}</div>
             <div className="card-body">{post.body}</div>
             <div className="card-footer">

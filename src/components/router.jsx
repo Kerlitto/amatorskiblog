@@ -9,7 +9,7 @@ import { Navbar } from "./Navbar.jsx";
 
 export const router = createBrowserRouter([
   {
-    path: "*",
+    path: "/",
     element: <Navigate to="/posts" />,
   },
   {

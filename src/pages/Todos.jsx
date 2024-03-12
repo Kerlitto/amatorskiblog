@@ -3,18 +3,18 @@ import { getTodos } from "../api/todos";
 import { useLoaderData } from "react-router-dom";
 
 const TodosPage = () => {
-  const data = useLoaderData();
+  const todos = useLoaderData();
 
   return (
     <>
       <h1>Todos</h1>
       <div className="card-grid">
-        {data.map((data) => (
+        {todos.map((todos) => (
           <li
-            key={data.id}
-            className={data.completed ? "crossed-through" : undefined}
+            key={todos.id}
+            className={todos.completed ? "crossed-through" : undefined}
           >
-            {data.title}
+            {todos.title}
           </li>
         ))}
       </div>

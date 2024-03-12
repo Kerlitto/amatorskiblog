@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 import "../styles.css";
 import { getPost } from "../api/posts";
@@ -10,8 +10,20 @@ function PostPage() {
   return (
     <>
       <h1>{post.title}</h1>
-      <h1>{user.name}</h1>
-      <h1>{comments.email}</h1>
+      <div>
+        By: <Link to={`/users/${user.id}`}>{user.name}</Link>
+      </div>
+      <br></br>
+      <div>{post.body}</div>
+      <h2>Comments</h2>
+      <div className="comments-card-list">
+        {comments.map((comment) => (
+          <div key={comment.id} className="card">
+            <div className="card-top comment">{comment.email}</div>
+            <div className="card-body">{comment.body}</div>
+          </div>
+        ))}
+      </div>
     </>
   );
 }
