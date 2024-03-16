@@ -9,7 +9,7 @@ function UsersPage() {
     <>
       <h1>Users</h1>
       <div className="card-grid">
-        {users.map((users) => (
+        {users.map(users => (
           <div key={users.Id} className="card">
             <div className="card-top">{users.name}</div>
             <div className="card-body">
@@ -18,7 +18,7 @@ function UsersPage() {
               <br></br> <Link to={`mailto:${users.email}`}>{users.email}</Link>
             </div>
             <div className="card-footer">
-              <Link to={`/users/${users.id}`} className="view-button">
+              <Link to={`/users/${users.id}`} className="button-full">
                 View
               </Link>
             </div>

@@ -1,6 +1,7 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
 import { postPageRoute } from "../pages/Post.jsx";
+import { newPostPageRoute } from "../pages/NewPost.jsx";
 import { postsPageRoute } from "../pages/Posts.jsx";
 import { usersPageRoute } from "../pages/Users.jsx";
 import { userPageRoute } from "../pages/User.jsx";
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
                 ...postsPageRoute,
               },
               { path: ":postId", ...postPageRoute },
+              { path: "new", ...newPostPageRoute },
             ],
           },
           {

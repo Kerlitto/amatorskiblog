@@ -24,12 +24,12 @@ function UserPage() {
       </div>
       <h1>Posts</h1>
       <div className="card-grid">
-        {posts.map((post) => (
+        {posts.map(post => (
           <div key={post.id} className="card">
             <div className="card-top">{post.title}</div>
             <div className="card-body">{post.body}</div>
             <div className="card-footer">
-              <Link to={`/posts/${post.id}`} className="view-button">
+              <Link to={`/posts/${post.id}`} className="button-full">
                 View
               </Link>
             </div>
@@ -38,7 +38,7 @@ function UserPage() {
       </div>
       <h1>Todos</h1>
       <div className="card-grid">
-        {todos.map((todos) => (
+        {todos.map(todos => (
           <li
             key={todos.id}
             className={todos.completed ? "crossed-through" : undefined}

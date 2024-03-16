@@ -91,15 +91,23 @@ body {
   max-width: 1200px;
 }
 
-.view-button {
+.button-full {
   text-decoration: none;
   border: none;
   border-radius: 0.5rem;
-  font-family: inherit;
-  font-size: inherit;
-  padding: 10px;
+  font-size: 20px;
+  padding: 0.75rem 1rem;
   color: white;
   background-color: rgba(10, 10, 82, 0.781);
+}
+
+.button-transparent {
+  text-decoration: none;
+  border: 2px solid;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 20px;
+  color: rgba(10, 10, 82, 0.781);
 }
 
 .crossed-through {
@@ -166,4 +174,62 @@ body {
   font-size: 15px;
   border-bottom: 0;
   padding-bottom: 0;
+}
+
+.title-text-and-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  flex-grow: 1;
+}
+
+.title-author-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+}
+
+#title,
+#author,
+#body {
+  font-size: inherit;
+  font-family: inherit;
+  border: 2px solid;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+#body {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.label {
+  padding-bottom: 0.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-rows: min-content min-content min-content;
+  gap: 15px;
+}
+
+.form-footer-btn-grid {
+  display: flex;
+  justify-content: flex-end;
+  gap: inherit;
+}
+
+.posts-search-bar {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 1rem;
+  gap: 15px;
+  align-items: flex-end;
 }

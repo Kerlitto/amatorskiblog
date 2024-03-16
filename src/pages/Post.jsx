@@ -17,7 +17,7 @@ function PostPage() {
       <div>{post.body}</div>
       <h2>Comments</h2>
       <div className="comments-card-list">
-        {comments.map((comment) => (
+        {comments.map(comment => (
           <div key={comment.id} className="card">
             <div className="card-top comment">{comment.email}</div>
             <div className="card-body">{comment.body}</div>
