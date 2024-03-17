@@ -119,6 +119,7 @@ h2 {
   color: white;
   background-color: rgba(10, 10, 82, 0.781);
   text-wrap: nowrap;
+  cursor: pointer;
 }
 
 .button-transparent {
@@ -129,6 +130,7 @@ h2 {
   font-size: 20px;
   color: rgba(10, 10, 82, 0.781);
   text-wrap: nowrap;
+  cursor: pointer;
 }
 
 .crossed-through {

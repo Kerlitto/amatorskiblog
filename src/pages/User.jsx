@@ -22,7 +22,8 @@ function UserPage() {
         <b>Address:</b> {user.address.street} {user.address.suite}{" "}
         {user.address.city} {user.address.zipcode}
       </div>
-      <h1>Posts</h1>
+      <br />
+      <h1 className="title-text-and-button">Posts</h1>
       <div className="card-grid">
         {posts.map(post => (
           <div key={post.id} className="card">
@@ -36,8 +37,9 @@ function UserPage() {
           </div>
         ))}
       </div>
-      <h1>Todos</h1>
-      <div className="card-grid">
+      <br />
+      <h1 className="title-text-and-button">Todos</h1>
+      <div className="todos-list">
         {todos.map(todos => (
           <li
             key={todos.id}

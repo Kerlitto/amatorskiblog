@@ -35,12 +35,12 @@ export const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/Users" className="link">
+            <Link to="/users" className="link">
               Users
             </Link>
           </li>
           <li>
-            <Link to="/Todos" className="link">
+            <Link to="/todos" className="link">
               Todos
             </Link>
           </li>

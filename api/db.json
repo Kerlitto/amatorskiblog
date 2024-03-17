@@ -4003,7 +4003,6 @@
       "body": "perspiciatis quis doloremque\nveniam nisi eos velit sed\nid totam inventore voluptatem laborum et eveniet\naut aut aut maxime quia temporibus ut omnis"
     }
   ],
-
   "photos": [
     {
       "albumId": 1,
@@ -39006,7 +39005,6 @@
       "thumbnailUrl": "https://via.placeholder.com/150/6dd9cb"
     }
   ],
-
   "posts": [
     {
       "userId": 1,
@@ -39607,6 +39605,12 @@
       "id": 100,
       "title": "at nam consequatur ea labore ea harum",
       "body": "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut"
+    },
+    {
+      "title": "Dzien dobry",
+      "userId": "5",
+      "body": "testowy post",
+      "id": 101
     }
   ],
   "todos": [
@@ -40809,9 +40813,37 @@
       "id": 200,
       "title": "ipsam aperiam voluptates qui",
       "completed": false
+    },
+    {
+      "title": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "completed": false,
+      "id": 201
+    },
+    {
+      "title": "MOWIEMOWIE",
+      "user": "6",
+      "completed": false,
+      "id": 202
+    },
+    {
+      "title": "dupadupa",
+      "userId": "8",
+      "completed": false,
+      "id": 203
+    },
+    {
+      "title": "dupadupa",
+      "userId": "5",
+      "completed": false,
+      "id": 204
+    },
+    {
+      "title": "dupa",
+      "userId": "2",
+      "completed": false,
+      "id": 205
     }
   ],
-
   "users": [
     {
       "id": 1,

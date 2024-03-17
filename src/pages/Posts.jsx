@@ -1,5 +1,5 @@
 import "../styles/styles.css";
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useNavigation } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
 import { getFilteredPosts, getPosts } from "../api/posts";
 import { getUsers } from "../api/users";
@@ -8,6 +8,7 @@ import { TextInputBox } from "../components/textInputContainers";
 
 function PostsPage() {
   const { posts, users, filteredPost } = useLoaderData();
+  const { state } = useNavigation();
 
   console.log(filteredPost, posts);
 
@@ -25,6 +26,7 @@ function PostsPage() {
         <SelectAuthor users={users} />
         <button className="button-full">Filter</button>
       </Form>
+
       <div className="card-grid">
         {(filteredPost.length === 0 ? posts : filteredPost).map(post => (
           <div key={post.id} className="card">

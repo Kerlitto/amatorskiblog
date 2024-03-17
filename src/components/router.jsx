@@ -6,6 +6,7 @@ import { postsPageRoute } from "../pages/Posts.jsx";
 import { usersPageRoute } from "../pages/Users.jsx";
 import { userPageRoute } from "../pages/User.jsx";
 import { todosPageRoute } from "../pages/Todos.jsx";
+import { newTodoPageRoute } from "../pages/NewTodo.jsx";
 import { Navbar } from "./Navbar.jsx";
 
 export const router = createBrowserRouter([
@@ -49,6 +50,7 @@ export const router = createBrowserRouter([
                 index: true,
                 ...todosPageRoute,
               },
+              { path: "new", ...newTodoPageRoute },
             ],
           },
         ],
