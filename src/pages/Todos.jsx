@@ -1,4 +1,4 @@
-import "../styles.css";
+import "../styles/styles.css";
 import { getTodos } from "../api/todos";
 import { useLoaderData } from "react-router-dom";
 
@@ -7,9 +7,9 @@ const TodosPage = () => {
 
   return (
     <>
-      <h1>Todos</h1>
-      <div className="card-grid">
-        {todos.map((todos) => (
+      <h1 className="title-text-and-button">Todos</h1>
+      <div>
+        {todos.map(todos => (
           <li
             key={todos.id}
             className={todos.completed ? "crossed-through" : undefined}

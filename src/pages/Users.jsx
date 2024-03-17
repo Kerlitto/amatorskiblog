@@ -1,4 +1,4 @@
-import "../styles.css";
+import "../styles/styles.css";
 import { Link, useLoaderData } from "react-router-dom";
 import { getUsers } from "../api/users";
 
@@ -7,7 +7,7 @@ function UsersPage() {
 
   return (
     <>
-      <h1>Users</h1>
+      <h1 className="title-text-and-button">Users</h1>
       <div className="card-grid">
         {users.map(users => (
           <div key={users.Id} className="card">
@@ -15,7 +15,10 @@ function UsersPage() {
             <div className="card-body">
               {users.company.name}
               <br></br> {users.website}
-              <br></br> <Link to={`mailto:${users.email}`}>{users.email}</Link>
+              <br></br>{" "}
+              <Link to={`mailto:${users.email}`} className="mailto">
+                {users.email}
+              </Link>
             </div>
             <div className="card-footer">
               <Link to={`/users/${users.id}`} className="button-full">

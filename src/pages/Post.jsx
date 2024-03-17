@@ -1,6 +1,6 @@
 import { Link, useLoaderData } from "react-router-dom";
 
-import "../styles.css";
+import "../styles/styles.css";
 import { getPost } from "../api/posts";
 import { getUser } from "../api/users";
 import { getComments } from "../api/comments";
@@ -9,7 +9,13 @@ function PostPage() {
   const { user, post, comments } = useLoaderData();
   return (
     <>
-      <h1>{post.title}</h1>
+      <div className="title-text-and-button">
+        <h1>{post.title}</h1>
+        <Link to={"/posts/new"}>
+          <button className="button-transparent">Edit Post</button>
+        </Link>
+      </div>
+
       <div>
         By: <Link to={`/users/${user.id}`}>{user.name}</Link>
       </div>

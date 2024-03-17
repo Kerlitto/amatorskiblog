@@ -1,6 +1,6 @@
 import { Link, useLoaderData } from "react-router-dom";
 
-import "../styles.css";
+import "../styles/styles.css";
 import { getUser, getUsersPosts, getUsersTodos } from "../api/users";
 
 function UserPage() {

@@ -10,6 +10,6 @@ export const getPost = (postId, options) => {
 
 export const getFilteredPosts = (query, user, options) => {
   return baseApi
-    .get(`/posts?q=${query} & userId=${user}`, options)
+    .get(`/posts?q=${query}&userId=${user}`, options)
     .then(res => res.data);
 };
