@@ -4,16 +4,17 @@ import { useLoaderData } from "react-router-dom";
 import { getUsers } from "../api/users";
 import { SelectAuthor } from "../components/selectAuthor";
 import { TextInputArea, TextInputBox } from "../components/textInputContainers";
+import { getPost } from "../api/posts";
 
-function NewPostPage() {
-  const users = useLoaderData();
+function EditPostPage() {
+  const { users, post } = useLoaderData();
 
   return (
     <>
-      <h1 className="title-text-and-button">New Post</h1>
-      <Form className="form-grid" method="post">
+      <h1 className="title-text-and-button">Edit Post</h1>
+      <Form className="form-grid" method="put">
         <div className="title-author-group">
-          <TextInputBox label="Title" type="text" name="title" />
+          <TextInputBox label="Title" type="text" name="title" value={post} />
           <SelectAuthor users={users} />
         </div>
         <TextInputArea label="Body" type="text" name="body" />
@@ -28,22 +29,27 @@ function NewPostPage() {
   );
 }
 
-function loader({ request: { signal } }) {
-  return getUsers({ signal });
+async function loader({ request: { signal }, params: { postId } }) {
+  const users = getUsers({ signal });
+  const post = getPost(postId, { signal });
+  console.log(post);
+
+  return { users: await users, post: await post };
 }
 
-export const newPostPageRoute = {
+export const editPostPageRoute = {
   loader,
-  element: <NewPostPage />,
+  element: <EditPostPage />,
   action: async ({ request }) => {
     const formData = await request.formData();
     const title = formData.get("title");
     const userId = formData.get("userId");
     const body = formData.get("body");
 
-    const post = await fetch("http://127.0.0.1:3000/posts", {
-      method: "POST",
+    const post = await fetch(`http://127.0.0.1:3000/posts/${post.id}`, {
+      method: "PUT",
       signal: request.signal,
+
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, userId, body }),
     }).then((res) => res.json());

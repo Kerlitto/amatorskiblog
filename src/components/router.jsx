@@ -2,6 +2,7 @@ import { Navigate, createBrowserRouter } from "react-router-dom";
 
 import { postPageRoute } from "../pages/Post.jsx";
 import { newPostPageRoute } from "../pages/NewPost.jsx";
+import { editPostPageRoute } from "../pages/EditPost.jsx";
 import { postsPageRoute } from "../pages/Posts.jsx";
 import { usersPageRoute } from "../pages/Users.jsx";
 import { userPageRoute } from "../pages/User.jsx";
@@ -29,7 +30,13 @@ export const router = createBrowserRouter([
                 index: true,
                 ...postsPageRoute,
               },
-              { path: ":postId", ...postPageRoute },
+              {
+                path: ":postId",
+                children: [
+                  { index: true, ...postPageRoute },
+                  { path: "editpost", ...editPostPageRoute },
+                ],
+              },
               { path: "new", ...newPostPageRoute },
             ],
           },

@@ -1,4 +1,4 @@
-export function SelectAuthor({ users }) {
+export function SelectAuthor({ users, props }) {
   return (
     <div className="input-group">
       <label htmlFor="author" className="label">
@@ -6,8 +6,8 @@ export function SelectAuthor({ users }) {
       </label>
       <select id="author" name="userId">
         <option value="">none</option>
-        {users.map(users => (
-          <option value={users.id} key={users.id}>
+        {users.map((users) => (
+          <option value={users.id} key={users.id} {...props}>
             {users.name}
           </option>
         ))}

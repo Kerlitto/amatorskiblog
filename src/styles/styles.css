@@ -123,6 +123,7 @@ h2 {
 }
 
 .button-transparent {
+  background-color: white;
   text-decoration: none;
   border: 2px solid;
   border-radius: 0.5rem;
