@@ -2,6 +2,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 import "../styles/styles.css";
 import { getUser, getUsersPosts, getUsersTodos } from "../api/users";
+import { Button } from "../components/buttons";
 
 function UserPage() {
   const { user, posts, todos } = useLoaderData();
@@ -9,14 +10,16 @@ function UserPage() {
     <>
       <h1>{user.name}</h1>
       <div>
-        <Link to={`mailto:${user.email}`}>{user.email}</Link>
+        <Link to={`mailto:${user.email}`} className="mailto">
+          {user.email}
+        </Link>
       </div>
       <br></br>
       <div>
         <b>Company:</b> {user.company.name}
       </div>
       <div>
-        <b>Website:</b> {user.website}
+        <b>Website:</b> <Link to={user.website}>{user.website}</Link>
       </div>
       <div>
         <b>Address:</b> {user.address.street} {user.address.suite}{" "}
@@ -30,8 +33,8 @@ function UserPage() {
             <div className="card-top">{post.title}</div>
             <div className="card-body">{post.body}</div>
             <div className="card-footer">
-              <Link to={`/posts/${post.id}`} className="button-full">
-                View
+              <Link to={`/posts/${post.id}`}>
+                <Button>View</Button>
               </Link>
             </div>
           </div>

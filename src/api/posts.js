@@ -20,6 +20,14 @@ export const getFilteredPosts = (query, user, options) => {
   }
 };
 
-export const postPost = (postId, options) => {
-  return baseApi.post(`posts/${postId}`, options).then(res => res.data);
+export const createPost = (data, options) => {
+  return baseApi.post(`posts/`, data, options).then(res => res.data);
+};
+
+export const editPost = (postId, data, options) => {
+  return baseApi.put(`posts/${postId}`, data, options).then(res => res.data);
+};
+
+export const deletePost = (postId, data, options) => {
+  return baseApi.delete(`posts/${postId}`, data, options).then(res => res.data);
 };

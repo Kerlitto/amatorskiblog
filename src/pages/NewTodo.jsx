@@ -1,28 +1,35 @@
 import "../styles/styles.css";
-import { Form, Link, redirect } from "react-router-dom";
+import { Form, Link, redirect, useActionData } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
 import { getUsers } from "../api/users";
 import { SelectAuthor } from "../components/selectAuthor";
 import { TextInputBox } from "../components/textInputContainers";
-import { getTodos } from "../api/todos";
+import { createTodo } from "../api/todos";
+import { Button } from "../components/buttons";
 
 function NewTodoPage() {
   const users = useLoaderData();
+  const errorMessage = useActionData();
 
   return (
     <>
       <h1 className="title-text-and-button">New Todo</h1>
       <Form className="form-grid" method="post">
         <div className="title-author-group">
-          <TextInputBox label="title" type="text" name="title" />
+          <TextInputBox
+            label={errorMessage ? errorMessage : "Title"}
+            type="text"
+            name="title"
+          />
+
           <SelectAuthor users={users} />
         </div>
 
         <div className="form-footer-btn-grid">
-          <Link to={`..`} className="button-transparent">
-            Cancel
+          <Link to={`..`}>
+            <Button transparent>Cancel</Button>
           </Link>
-          <button className="button-full">Save</button>
+          <Button submit>Save</Button>
         </div>
       </Form>
     </>
@@ -40,13 +47,14 @@ export const newTodoPageRoute = {
     const formData = await request.formData();
     const title = formData.get("title");
     const userId = formData.get("userId");
+    if (title === "") {
+      return "Title is required";
+    }
 
-    const todo = await fetch("http://127.0.0.1:3000/todos", {
-      method: "POST",
-      signal: request.signal,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, userId, completed: false }),
-    }).then(res => res.json());
+    const todo = await createTodo(
+      { title, userId },
+      { signal: request.signal }
+    );
 
     return redirect("..");
   },

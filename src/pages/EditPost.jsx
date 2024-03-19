@@ -4,25 +4,42 @@ import { useLoaderData } from "react-router-dom";
 import { getUsers } from "../api/users";
 import { SelectAuthor } from "../components/selectAuthor";
 import { TextInputArea, TextInputBox } from "../components/textInputContainers";
-import { getPost } from "../api/posts";
+import { deletePost, editPost, getPost } from "../api/posts";
+import { Button } from "../components/buttons";
 
 function EditPostPage() {
   const { users, post } = useLoaderData();
+  console.log(post.title);
 
   return (
     <>
-      <h1 className="title-text-and-button">Edit Post</h1>
+      <div className="title-text-and-button">
+        <h1>Edit Post</h1>
+        <Form method="delete">
+          <Button transparent>REMOVE</Button>
+        </Form>
+      </div>
       <Form className="form-grid" method="put">
         <div className="title-author-group">
-          <TextInputBox label="Title" type="text" name="title" value={post} />
-          <SelectAuthor users={users} />
+          <TextInputBox
+            label="Title"
+            type="text"
+            name="title"
+            defaultValues={post}
+          />
+          <SelectAuthor users={users} defaultValues={post} />
         </div>
-        <TextInputArea label="Body" type="text" name="body" />
+        <TextInputArea
+          label="Body"
+          type="text"
+          name="body"
+          defaultValues={post}
+        />
         <div className="form-footer-btn-grid">
-          <Link to={`/`} className="button-transparent">
-            Cancel
+          <Link to={`..`}>
+            <Button transparent>Cancel</Button>
           </Link>
-          <button className="button-full">Save</button>
+          <Button>Save</Button>
         </div>
       </Form>
     </>
@@ -32,28 +49,46 @@ function EditPostPage() {
 async function loader({ request: { signal }, params: { postId } }) {
   const users = getUsers({ signal });
   const post = getPost(postId, { signal });
-  console.log(post);
 
   return { users: await users, post: await post };
 }
 
 export const editPostPageRoute = {
   loader,
-  element: <EditPostPage />,
-  action: async ({ request }) => {
-    const formData = await request.formData();
-    const title = formData.get("title");
-    const userId = formData.get("userId");
-    const body = formData.get("body");
+  action: async ({ request, params: { postId } }) => {
+    switch (request.method) {
+      case "PUT": {
+        const formData = await request.formData();
+        const title = formData.get("title");
+        const userId = formData.get("userId");
+        const body = formData.get("body");
 
-    const post = await fetch(`http://127.0.0.1:3000/posts/${post.id}`, {
-      method: "PUT",
-      signal: request.signal,
+        const post = await editPost(
+          postId,
+          { title, body, userId },
+          { signal: request.signal }
+        );
 
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, userId, body }),
-    }).then((res) => res.json());
+        return redirect(`/posts/${post.id}`);
+      }
+      case "DELETE": {
+        const formData = await request.formData();
+        const title = formData.get("title");
+        const userId = formData.get("userId");
+        const body = formData.get("body");
 
-    return redirect("..");
+        const post = await deletePost(
+          postId,
+          { title, body, userId },
+          { signal: request.signal }
+        );
+
+        return redirect(`/posts/`);
+      }
+      default: {
+        throw new Response("", { status: 405 });
+      }
+    }
   },
+  element: <EditPostPage />,
 };

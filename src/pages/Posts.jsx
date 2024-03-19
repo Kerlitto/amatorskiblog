@@ -5,10 +5,10 @@ import { getFilteredPosts, getPosts } from "../api/posts";
 import { getUsers } from "../api/users";
 import { SelectAuthor } from "../components/selectAuthor";
 import { TextInputBox } from "../components/textInputContainers";
+import { Button } from "../components/buttons";
 
 function PostsPage() {
   const { posts, users, filteredPost } = useLoaderData();
-  const { state } = useNavigation();
 
   console.log(filteredPost, posts);
 
@@ -18,13 +18,13 @@ function PostsPage() {
         <h1>Posts</h1>
 
         <Link to={"/posts/new"}>
-          <button className="button-transparent">New Post</button>
+          <Button transparent>New Post</Button>
         </Link>
       </div>
       <Form className="posts-search-bar">
         <TextInputBox label="Query" type="search" name="query" />
         <SelectAuthor users={users} />
-        <button className="button-full">Filter</button>
+        <Button>Filter</Button>
       </Form>
 
       <div className="card-grid">
@@ -34,7 +34,7 @@ function PostsPage() {
             <div className="card-body">{post.body}</div>
             <div className="card-footer">
               <Link to={`/posts/${post.id}`}>
-                <button className="button-full">View</button>
+                <Button>View</Button>
               </Link>
             </div>
           </div>

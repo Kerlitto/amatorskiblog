@@ -1,27 +1,34 @@
 import "../styles/styles.css";
-import { Form, Link, redirect } from "react-router-dom";
+import { Form, Link, redirect, useActionData } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
 import { getUsers } from "../api/users";
 import { SelectAuthor } from "../components/selectAuthor";
 import { TextInputArea, TextInputBox } from "../components/textInputContainers";
+import { createPost } from "../api/posts";
+import { Button } from "../components/buttons";
 
 function NewPostPage() {
   const users = useLoaderData();
+  const errorMessage = useActionData();
 
   return (
     <>
       <h1 className="title-text-and-button">New Post</h1>
       <Form className="form-grid" method="post">
         <div className="title-author-group">
-          <TextInputBox label="Title" type="text" name="title" />
+          <TextInputBox
+            label={errorMessage ? errorMessage : "Title"}
+            type="text"
+            name="title"
+          />
           <SelectAuthor users={users} />
         </div>
         <TextInputArea label="Body" type="text" name="body" />
         <div className="form-footer-btn-grid">
-          <Link to={`/`} className="button-transparent">
-            Cancel
+          <Link to={`..`}>
+            <Button transparent>Cancel</Button>
           </Link>
-          <button className="button-full">Save</button>
+          <Button submit>Save</Button>
         </div>
       </Form>
     </>
@@ -34,20 +41,21 @@ function loader({ request: { signal } }) {
 
 export const newPostPageRoute = {
   loader,
-  element: <NewPostPage />,
   action: async ({ request }) => {
     const formData = await request.formData();
     const title = formData.get("title");
     const userId = formData.get("userId");
     const body = formData.get("body");
+    if (title === "") {
+      return "Title is required";
+    }
 
-    const post = await fetch("http://127.0.0.1:3000/posts", {
-      method: "POST",
-      signal: request.signal,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, userId, body }),
-    }).then((res) => res.json());
+    const post = await createPost(
+      { title, body, userId },
+      { signal: request.signal }
+    );
 
-    return redirect("..");
+    return redirect(`/posts/${post.id}`);
   },
+  element: <NewPostPage />,
 };

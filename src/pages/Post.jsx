@@ -4,6 +4,7 @@ import "../styles/styles.css";
 import { getPost } from "../api/posts";
 import { getUser } from "../api/users";
 import { getComments } from "../api/comments";
+import { Button } from "../components/buttons";
 
 function PostPage() {
   const { user, post, comments } = useLoaderData();
@@ -12,7 +13,7 @@ function PostPage() {
       <div className="title-text-and-button">
         <h1>{post.title}</h1>
         <Link to={"editpost"}>
-          <button className="button-transparent">Edit Post</button>
+          <Button transparent>Edit Post</Button>
         </Link>
       </div>
 
@@ -23,7 +24,7 @@ function PostPage() {
       <div>{post.body}</div>
       <h2>Comments</h2>
       <div className="comments-card-list">
-        {comments.map((comment) => (
+        {comments.map(comment => (
           <div key={comment.id} className="card">
             <div className="card-top comment">{comment.email}</div>
             <div className="card-body">{comment.body}</div>

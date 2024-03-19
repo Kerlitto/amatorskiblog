@@ -1,23 +1,31 @@
-import { useState } from "react";
-
-export function TextInputBox(props) {
+export function TextInputBox({ label, type, name, defaultValues = {} }) {
   return (
     <div className="input-group">
       <label htmlFor="title" className="label">
-        {props.label}
+        {label}
       </label>
-      <input type={props.type} name={props.name} id="title" />
+      <input
+        type={type}
+        name={name}
+        id="title"
+        defaultValue={defaultValues.title}
+      />
     </div>
   );
 }
 
-export function TextInputArea(props) {
+export function TextInputArea({ label, type, name, defaultValues = {} }) {
   return (
     <div className="input-group">
       <label htmlFor="body" className="label">
-        {props.label}
+        {label}
       </label>
-      <textarea type={props.type} name={props.name} id="body" />
+      <textarea
+        type={type}
+        name={name}
+        id="body"
+        defaultValue={defaultValues.body}
+      />
     </div>
   );
 }

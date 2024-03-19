@@ -4,6 +4,7 @@ import { Form, Link, useLoaderData } from "react-router-dom";
 import { TextInputBox } from "../components/textInputContainers";
 import { SelectAuthor } from "../components/selectAuthor";
 import { getUsers } from "../api/users";
+import { Button } from "../components/buttons";
 
 const TodosPage = () => {
   const { todos, users, filteredTodos } = useLoaderData();
@@ -13,24 +14,25 @@ const TodosPage = () => {
       <div className="title-text-and-button">
         <h1>Todos</h1>
         <Link to={"/todos/new"}>
-          <button className="button-transparent">New Todo</button>
+          <Button transparent>New Todo</Button>
         </Link>
       </div>
       <Form className="posts-search-bar">
         <TextInputBox label="Query" type="search" name="query" />
         <SelectAuthor users={users} />
-        <button className="button-full">Filter</button>
+        <Button>Filter</Button>
       </Form>
-      <div>
+      <ul>
         {(filteredTodos.length === 0 ? todos : filteredTodos).map(todo => (
           <li
             key={todo.id}
-            className={todo.completed ? "crossed-through" : undefined}
+            className={todo.completed ? "todo crossed-through" : "todo"}
           >
-            {todo.title}
+            <span style={{ fontWeight: "bold" }}>{todo.id}.</span>
+            <Link to={`/todos/${todo.id}`}>{todo.title}</Link>
           </li>
         ))}
-      </div>
+      </ul>
     </>
   );
 };

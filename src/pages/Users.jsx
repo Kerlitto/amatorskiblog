@@ -1,6 +1,7 @@
 import "../styles/styles.css";
 import { Link, useLoaderData } from "react-router-dom";
 import { getUsers } from "../api/users";
+import { Button } from "../components/buttons";
 
 function UsersPage() {
   const users = useLoaderData();
@@ -21,8 +22,8 @@ function UsersPage() {
               </Link>
             </div>
             <div className="card-footer">
-              <Link to={`/users/${users.id}`} className="button-full">
-                View
+              <Link to={`/users/${users.id}`}>
+                <Button>View</Button>
               </Link>
             </div>
           </div>
